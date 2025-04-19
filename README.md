@@ -35,8 +35,8 @@ It fetches your completed anime list from AniList, searches for corresponding sh
    Clone this repository or download the `anilist_to_trakt.py` script file.
 
    ```bash
-   git clone <your-repo-url>
-   cd <your-repo-directory>
+   git clone https://github.com/tnicko1/anilist-to-trakt-migration.git
+   cd anilist-to-trakt-migration
    ```
 
 **2. Install Dependencies:**
@@ -45,6 +45,10 @@ It fetches your completed anime list from AniList, searches for corresponding sh
 
    ```bash
    pip install requests tqdm
+   ```
+   or
+   ```bash
+   pip install -r requirements.txt
    ```
 
    *   `requests`: For making HTTP requests to the AniList and Trakt APIs.
