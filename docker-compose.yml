@@ -1,0 +1,35 @@
+services:
+  mal-anilist-trakt-sync:
+    image: ghcr.io/balgerion/mal-anilist-to-trakt-migration:latest
+    container_name: mal-anilist-trakt-sync
+    restart: unless-stopped
+    environment:
+      # Timezone
+      - TZ=${TZ:-Europe/Warsaw}
+      
+      # Cron schedule
+      - CRON_SCHEDULE=${CRON_SCHEDULE}
+      
+      # Trakt credentials
+      - TRAKT_CLIENT_ID=${TRAKT_CLIENT_ID}
+      - TRAKT_CLIENT_SECRET=${TRAKT_CLIENT_SECRET}
+      
+      # Source: MAL lub AniList
+      - DATA_SOURCE=${DATA_SOURCE}
+      
+      # MAL credentials (jeśli DATA_SOURCE=MAL)
+      - MAL_CLIENT_ID=${MAL_CLIENT_ID}
+      - MAL_USERNAME=${MAL_USERNAME}
+      
+      # AniList credentials (jeśli DATA_SOURCE=AniList)
+      - ANILIST_USERNAME=${ANILIST_USERNAME}
+      
+    volumes:
+      # Persistent storage for token
+      - ./config:/config
+      - ./logs:/var/log
+    
+    # Dla pierwszego uruchomienia możesz zakomentować CRON_SCHEDULE
+    # aby ręcznie przejść przez autoryzację Trakt
+    # stdin_open: true
+    # tty: true
